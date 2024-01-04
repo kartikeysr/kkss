@@ -1,0 +1,42 @@
+<ngx-charts-bar-vertical
+  [view]="view"
+  [results]="multi"
+  [gradient]="gradient"
+  [scheme]="colorScheme"
+  [xAxis]="showXAxis"
+  [yAxis]="showYAxis"
+  [legend]="showLegend"
+  [showXAxisLabel]="showXAxisLabel"
+  [xAxisLabel]="xAxisLabel"
+  [showYAxisLabel]="showYAxisLabel"
+  [yAxisLabel]="yAxisLabel"
+  (select)="onSelect($event)"
+  [customColors]="customColors"
+>
+  <ng-template
+    let-group="group"
+    let-tooltipX="tooltipX"
+    let-tooltipY="tooltipY"
+  >
+    <svg:g *ngFor="let bar of group.series; let i = index">
+      <ng-container *ngIf="bar.value >= 0; else negativeBar">
+        <svg:rect
+          [attr.x]="bar.x"
+          [attr.y]="bar.y"
+          [attr.width]="bar.width"
+          [attr.height]="bar.height"
+          [style.fill]="'blue'"
+        />
+      </ng-container>
+      <ng-template #negativeBar>
+        <svg:rect
+          [attr.x]="bar.x"
+          [attr.y]="bar.y"
+          [attr.width]="bar.width"
+          [attr.height]="bar.height"
+          [style.fill]="'blue'"
+        />
+      </ng-template>
+    </svg:g>
+  </ng-template>
+</ngx-charts-bar-vertical>
